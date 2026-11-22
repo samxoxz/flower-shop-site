@@ -1,0 +1,149 @@
+/* ---------- Font ---------- */
+/* Put your Aroma Vintage font file in a /fonts folder with one of these names */
+@font-face {
+  font-family: "Aroma Vintage";
+  src: url("fonts/AromaVintage.otf") format("opentype"),
+       url("fonts/AromaVintage.ttf") format("truetype");
+  font-display: swap;
+}
+
+/* ---------- Variables ---------- */
+:root {
+  --blue: #1e6bff;
+  --panel: #1c1c1c;
+  --cream: #fdf6ec;
+  --sidebar-w: 88px;
+  --panel-offset-x: 155px;
+  --nav-h: 112px;
+  --radius: 80px;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html, body { min-height: 100%; }
+
+body {
+  font-family: "Aroma Vintage", Georgia, serif;
+  color: #fff;
+  background: #000 url("images/background.jpg") center / cover no-repeat fixed;
+  min-height: 100vh;
+}
+
+/* ---------- Sidebar ---------- */
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: var(--sidebar-w);
+  height: 100vh;
+  background: var(--blue);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 80px;
+  z-index: 3;
+}
+
+.brand {
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-size: 3.4rem;
+  font-weight: normal;
+  color: var(--cream);
+  white-space: nowrap;
+  line-height: 1;
+}
+
+/* ---------- Nav ---------- */
+.nav {
+  position: fixed;
+  top: 12px;
+  left: calc(var(--sidebar-w) + 194px);
+  right: 14px;
+  display: flex;
+  justify-content: space-between;
+  gap: 24px;
+  z-index: 2;
+}
+
+.pill {
+  flex: 1;
+  max-width: 200px;
+  height: 86px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  color: #fff;
+  text-decoration: none;
+  font-size: 2rem;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.pill:hover {
+  background: rgba(255, 255, 255, 0.45);
+  transform: translateY(-2px);
+}
+
+/* ---------- Content panel ---------- */
+.panel {
+  position: relative;
+  margin-left: var(--panel-offset-x);
+  margin-top: var(--nav-h);
+  min-height: calc(100vh - var(--nav-h));
+  background: var(--panel);
+  border-top-left-radius: var(--radius);
+  padding: 114px 27px 80px 104px;
+  z-index: 1;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 116px 114px;
+}
+
+.card {
+  display: block;
+  aspect-ratio: 262 / 249;
+  background: #d9d9d9;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+
+.card:hover { transform: scale(1.03); }
+
+.card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 900px) {
+  :root { --sidebar-w: 56px; --panel-offset-x: 56px; --radius: 40px; }
+
+  .brand { font-size: 2.2rem; }
+
+  .nav {
+    left: calc(var(--sidebar-w) + 12px);
+    gap: 8px;
+  }
+
+  .pill { height: 56px; font-size: 1.1rem; }
+
+  .panel { padding: 48px 20px; }
+
+  .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 32px; }
+}
+
+@media (max-width: 520px) {
+  .grid { grid-template-columns: 1fr; }
+  .pill { font-size: 0.9rem; }
+}
